@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Level 6: Dictionary Attack Challenge</title>
+    <style>
+        body {
+            background-color: #000;
+            color: #fff;
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .container {
+            background-color: #222;
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+            width: 600px;
+            text-align: center;
+        }
+        input, button {
+            width: calc(100% - 20px);
+            margin: 10px auto;
+            padding: 10px;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+        }
+        input {
+            background-color: #333;
+            color: #fff;
+        }
+        button {
+            background-color: #444;
+            color: #fff;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #555;
+        }
+        .password-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            justify-content: space-between;
+            margin-top: 10px;
+        }
+        .password-column {
+            flex: 1;
+            min-width: 100px;
+        }
+        .password-item {
+            margin: 5px 0;
+            text-align: left;
+        }
+        .message {
+            margin-top: 20px;
+            padding: 10px;
+            border-radius: 8px;
+        }
+        .success {
+            background-color: #2d572c;
+            color: #fff;
+        }
+        .error {
+            background-color: #572c2c;
+            color: #fff;
+        }
+        .instructions {
+            background-color: #333;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            text-align: left;
+        }
+        .instructions h3 {
+            margin-top: 0;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>Level 6: Dictionary Attack Challenge</h1>
+
+    <div class="instructions">
+        <h3>Challenge Instructions</h3>
+        <p>Welcome to Level 6! Your goal is to log in to a hidden user account using the provided list of common passwords. The system uses one of these passwords, so you’ll need to systematically test them to find the right one. You can try passwords manually through the login form or get creative by uploading a PHP or Python script to automate the process (hint: think dictionary attack!). Be resourceful—some account details might require extra effort to uncover.</p>
+        <h3>What is a Brute-Force Attack?</h3>
+        <p>A brute-force attack tries every possible combination of characters (e.g., "aaa", "aab", "aac", etc.) to guess a password, often taking a long time due to the vast number of possibilities. Unlike this challenge’s dictionary attack, which uses a known list of common passwords, brute-forcing is less efficient but can crack complex passwords if given enough time. Attackers use tools like Hydra to automate these attempts, exploiting weak defenses like unlimited login tries.</p>
+    </div>
+
+    <h2>Password List</h2>
+    <div class="password-list">
+        <?php
+        $passwordChunks = array_chunk($passwordList, 5);
+        foreach ($passwordChunks as $chunk) {
+            echo '<div class="password-column">';
+            foreach ($chunk as $password) {
+                echo '<div class="password-item">' . htmlspecialchars($password) . '</div>';
+            }
+            echo '</div>';
+        }
+        ?>
+    </div>
+
+    <form method="post" enctype="multipart/form-data">
+        <input type="hidden" name="username" value="admin">
+        <input type="text" name="password" placeholder="Enter Password" required>
+        <button type="submit">Login</button>
+    </form>
+
+    <h2>Upload Dictionary Attack Script</h2>
+    <form method="post" enctype="multipart/form-data">
+        <input type="file" name="attack_script" required>
+        <button type="submit">Upload & Execute</button>
+    </form>
+
+    <?php if (isset($message)): ?>
+        <div class="message <?= strpos($message, 'successful') !== false ? 'success' : 'error' ?>">
+            <?= htmlspecialchars($message) ?>
+        </div>
+        <form method="get" action="level5_explanation.php">
+            <button type="submit">Proceed to Explanation</button>
+        </form>
+    <?php endif; ?>
+</div>
+</body>
+</html>

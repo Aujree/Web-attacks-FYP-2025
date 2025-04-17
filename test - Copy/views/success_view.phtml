@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome</title>
+    <style>
+        body {
+            background-color: black;
+            color: white;
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            text-align: center;
+            flex-direction: row;
+            gap: 20px;
+            padding: 20px;
+        }
+
+        .image-placeholder {
+            width: 200px;
+            height: 300px;
+            background-color: #444;
+            border: 2px dashed white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 14px;
+            color: #bbb;
+        }
+
+        .content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .message-box {
+            padding: 20px;
+            border: 1px solid white;
+            border-radius: 8px;
+            width: 100%;
+            max-width: 400px;
+            background-color: #222;
+            box-shadow: 0 4px 8px rgba(255, 255, 255, 0.2);
+        }
+
+        .button-container {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            width: 100%;
+            max-width: 400px;
+        }
+
+        a {
+            color: white;
+            text-decoration: none;
+            border: 1px solid white;
+            padding: 12px;
+            border-radius: 8px;
+            display: block;
+            background-color: #333;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+
+        a:hover {
+            background-color: white;
+            color: black;
+        }
+
+        /* Responsive: Stack layout on smaller screens */
+        @media (max-width: 768px) {
+            body {
+                flex-direction: column;
+            }
+
+            .image-placeholder {
+                width: 100%;
+                max-width: 300px;
+                height: 200px;
+            }
+        }
+
+        .logo-container {
+            text-align: center; /* Centers the logo */
+            padding: 20px 0;   /* Adds spacing */
+        }
+
+        .header-logo {
+            max-width: 200px;   /* Ensures the logo is not too large */
+            height: auto;       /* Maintains aspect ratio */
+            border-radius: 8px; /* Optional: Rounded corners */
+        }
+    </style>
+</head>
+<body>
+
+<!-- Logo at the top of the page -->
+<div class="logo-container">
+    <img
+            src="image_logo.jpg"
+            alt="Web Attack Practice Lab Logo"
+            class="header-logo"
+    >
+</div>
+
+<div class="content">
+    <div class="message-box">
+        <h1>Welcome to WebAttacks!</h1>
+        <p class="tagline">Your interactive cybersecurity training ground</p>
+
+        <div class="intro-text">
+            <p>WebAttacks is an immersive online platform designed to teach aspiring cybersecurity professionals through hands-on experience with real-world web vulnerabilities.</p>
+
+            
+        </div>
+
+        <div class="cta-section">
+            <p>Ready to begin your cybersecurity journey?</p>
+            <p class="instruction">Please choose a difficulty level below:</p>
+        </div>
+    </div>
+
+    <div class="button-container">
+        <a href="level1.php">Start Level 1: SQL Injection Practice</a>
+        <a href="level2.php">Start Level 2: More SQL Injection Practice</a>
+        <a href="level3.php">Start Level 3: XSS Script Attacks</a>
+        <a href="level4.php">Start Level 4: Advanced XSS Script Attacks</a>
+        <a href="level5.php">Start Level 5: Simple Brute Force Attacks</a>
+        <a href="level6.php">Start Level 6: Dictionary attacks</a>
+        <a href="level7.php">Start Level 7: MORE MORE MORE Injection Practice</a>
+        <a href="Log.php">Admin page</a>
+
+    </div>
+</div>
+
+<div class="logo-container">
+    <img
+            src="image_logo.jpg"
+            alt="Web Attack Practice Lab Logo"
+            class="header-logo"
+    >
+</div>
+
+</body>
+</html>

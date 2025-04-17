@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Error</title>
+    <style>
+        body {
+            background-color: black;
+            color: white;
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            text-align: center;
+        }
+        .error-box {
+            padding: 20px;
+            border: 1px solid red;
+            border-radius: 8px;
+            color: red;
+        }
+        a {
+            color: red;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+<div class="error-box">
+    <h1>Login Failed</h1>
+    <p><?= htmlspecialchars($message); ?></p>
+    <a href="index.php">Go back to Login</a>
+</div>
+</body>
+</html>

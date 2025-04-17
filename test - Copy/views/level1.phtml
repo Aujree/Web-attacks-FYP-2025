@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Level 1: SQL Injection Practice</title>
+    <style>
+        body {
+            background-color: #000;
+            color: #fff;
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .container {
+            background-color: #222;
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+            width: 400px;
+            text-align: center;
+        }
+        input[type="text"], button {
+            width: calc(100% - 20px);
+            margin: 10px auto;
+            padding: 10px;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+        }
+        input[type="text"] {
+            background-color: #333;
+            color: #fff;
+        }
+        button {
+            background-color: #444;
+            color: #fff;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #555;
+        }
+        pre {
+            background-color: #333;
+            color: #0f0;
+            padding: 10px;
+            text-align: left;
+            border-radius: 8px;
+            overflow-x: auto;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>SQL Injection Practice</h1>
+    <p>SQL Injection is a technique where attackers manipulate a database query by injecting malicious SQL code.</p>
+    <p>Try to figure out how an attacker might attempt to gain unauthorized access to the database.</p>
+    <p>Think about how user input is used in the query and what might happen if special characters are included.</p>
+
+    <h2>Source Code of the Query</h2>
+    <pre>
+$query = "SELECT name, information FROM level_1 WHERE name LIKE '%$name_query%'";
+    </pre>
+
+    <form method="post">
+        <input type="text" name="name_query" placeholder="Enter a name..." required>
+        <button type="submit">Search</button>
+    </form>
+
+    <?php if (!empty($results)): ?>
+        <h2>Results:</h2>
+        <ul>
+            <?php foreach ($results as $row): ?>
+                <li><strong><?= htmlspecialchars($row['name']) ?>:</strong> <?= htmlspecialchars($row['information']) ?></li>
+            <?php endforeach; ?>
+        </ul>
+        <form method="get" action="level1_explanation.php">
+            <button type="submit">Proceed to Explanation</button>
+        </form>
+    <?php elseif (isset($error)): ?>
+        <p>Error: <?= htmlspecialchars($error) ?></p>
+    <?php else: ?>
+        <p>No matching records found.</p>
+    <?php endif; ?>
+</div>
+</body>
+</html>

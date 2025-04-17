@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>XSS Challenge</title>
+    <style>
+        body {
+            background-color: #000;
+            color: #fff;
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+        }
+        .container {
+            background-color: #222;
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+            width: 90%;
+            max-width: 500px;
+            text-align: center;
+            box-sizing: border-box;
+        }
+        p {
+            font-size: 14px;
+            line-height: 1.5;
+            margin: 10px 0;
+        }
+        input[type="text"], button {
+            width: calc(100% - 20px);
+            margin: 10px auto;
+            padding: 10px;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            box-sizing: border-box;
+        }
+        input[type="text"] {
+            background-color: #333;
+            color: #fff;
+        }
+        button {
+            background-color: #444;
+            color: #fff;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #555;
+        }
+        pre {
+            background-color: #333;
+            color: #0f0;
+            padding: 10px;
+            text-align: left;
+            border-radius: 8px;
+            overflow-x: auto;
+            margin: 10px 0;
+            font-size: 14px;
+        }
+        h1, h2 {
+            margin: 10px 0;
+        }
+        .hint {
+            font-size: 12px;
+            color: #ccc;
+            margin: 5px 0;
+        }
+        .validation {
+            font-size: 14px;
+            margin: 10px 0;
+        }
+        .warning {
+            color: #ff5555;
+            font-weight: bold;
+            border: 1px solid #ff5555;
+            padding: 10px;
+            border-radius: 8px;
+            margin: 15px 0;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>XSS Practice Challenge</h1>
+
+
+    <h2>About XSS</h2>
+    <p>Cross-Site Scripting (XSS) is one of the most common web application vulnerabilities. It occurs when:</p>
+    <ol>
+        <li>An application includes untrusted data without proper validation</li>
+        <li>The browser executes this data as code</li>
+        <li>This allows attackers to execute scripts in the victim's browser</li>
+    </ol>
+
+    <p>There are three main types of XSS:</p>
+    <ul>
+        <li><strong>Reflected XSS:</strong> The malicious script comes from the current HTTP request</li>
+        <li><strong>Stored XSS:</strong> The malicious script is stored on the server</li>
+        <li><strong>DOM-based XSS:</strong> The vulnerability exists in client-side code</li>
+    </ul>
+
+    <h2>Your Challenge</h2>
+    <p>This page is intentionally vulnerable to XSS attacks to help you practice in a safe environment.
+        Your goal is to craft an input that executes JavaScript when displayed on the page.</p>
+
+    <p>The input field below will directly insert your text into the page's HTML without any sanitization. Try to:</p>
+    <ul>
+        <li>Create an alert box with the message "XSS"</li>
+        <li>Steal a "fake cookie" (we'll simulate this)</li>
+        <li>Change the page's appearance</li>
+    </ul>
+
+
+    <h2>Try Your Input:</h2>
+    <form method="POST">
+        <input type="text" id="input" name="user_input" value="<?php echo $user_input; ?>" placeholder="Enter your payload...">
+        <button type="submit">Submit</button>
+    </form>
+
+    <h2>Output:</h2>
+    <pre id="output"><?php echo $user_input; ?></pre>
+
+    <script>
+        // This is intentionally vulnerable code for educational purposes
+        // In a real application, you would NEVER do this without sanitization
+        document.getElementById("output").innerHTML = "<?php echo $user_input; ?>";
+
+        // Simulate a fake cookie for demonstration purposes
+
+    </script>
+
+    <p class="hint">Hint: Try payloads like &lt;img src=x onerror=alert(1)&gt; or &lt;svg onload=alert('XSS')&gt;</p>
+    <p class="hint">Advanced: Try stealing the document.cookie value</p>
+
+    <?php if (isset($user_input)): ?>
+        <p class="validation">
+            <?php if ($is_attack): ?>
+                <span style="color: green;">✅ This is a valid XSS attack!</span>
+            <?php else: ?>
+                <span style="color: red;">❌ Not a valid XSS attack.</span>
+            <?php endif; ?>
+        </p>
+        <form method="get" action="level3_explanation.php">
+            <button type="submit">Proceed to Explanation</button>
+        </form>
+    <?php endif; ?>
+
+</div>
+</body>
+</html>

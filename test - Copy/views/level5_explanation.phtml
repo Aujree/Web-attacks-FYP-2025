@@ -1,0 +1,254 @@
+<?php
+// password_attacks_explanation.php
+?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Password Attacks Explanation</title>
+    <style>
+        body {
+            background-color: #000;
+            color: #fff;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            min-height: 100vh;
+            box-sizing: border-box;
+        }
+        .container {
+            background-color: #222;
+            border-radius: 12px;
+            padding: 1.5rem;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+            width: 90%;
+            max-width: 800px;
+            text-align: left;
+            box-sizing: border-box;
+        }
+        h1, h2, h3 {
+            color: #fff;
+            margin: 1rem 0;
+        }
+        h1 {
+            font-size: 1.8rem;
+        }
+        h2 {
+            font-size: 1.4rem;
+        }
+        h3 {
+            font-size: 1.2rem;
+        }
+        p, li {
+            line-height: 1.6;
+            font-size: 1rem;
+            margin: 0.5rem 0;
+        }
+        ul, ol {
+            padding-left: 1.5rem;
+            margin: 1rem 0;
+        }
+        pre {
+            background-color: #333;
+            color: #0f0;
+            padding: 1rem;
+            border-radius: 8px;
+            overflow-x: auto;
+            font-size: 0.9rem;
+            line-height: 1.4;
+            margin: 1rem 0;
+            max-height: 300px;
+        }
+        code {
+            font-family: 'Courier New', Courier, monospace;
+        }
+        button {
+            background-color: #444;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            margin-top: 1rem;
+            cursor: pointer;
+            border-radius: 8px;
+            font-size: 1rem;
+            display: inline-block;
+        }
+        button:hover {
+            background-color: #555;
+        }
+        /* Responsiveness */
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+            .container {
+                width: 95%;
+                padding: 1rem;
+            }
+            h1 {
+                font-size: 1.5rem;
+            }
+            h2 {
+                font-size: 1.3rem;
+            }
+            h3 {
+                font-size: 1.1rem;
+            }
+            p, li {
+                font-size: 0.95rem;
+            }
+            pre {
+                font-size: 0.85rem;
+            }
+            button {
+                padding: 8px 16px;
+                font-size: 0.95rem;
+            }
+        }
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 1.3rem;
+            }
+            h2 {
+                font-size: 1.2rem;
+            }
+            h3 {
+                font-size: 1rem;
+            }
+            p, li {
+                font-size: 0.9rem;
+            }
+            pre {
+                font-size: 0.8rem;
+                padding: 0.8rem;
+            }
+            button {
+                padding: 6px 12px;
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>Password Attacks Vulnerability</h1>
+
+    <h2>What are Password Attacks?</h2>
+    <p>Password attacks are techniques used by attackers to compromise user accounts by obtaining, guessing, or bypassing passwords. These attacks exploit weak password practices, improper storage, or exposure of credentials. A common vulnerability, as seen in this level, is exposing a list of passwords, which gives attackers direct access to sensitive accounts.</p>
+
+    <h2>Vulnerable Code</h2>
+    <p>The following code snippet from this level is vulnerable because it exposes passwords:</p>
+    <pre>
+&lt;?php
+$query = "SELECT username, password FROM users";
+$result = $pdo->query($query);
+foreach ($result as $row) {
+    echo "Username: " . $row['username'] . ", Password: " . $row['password'] . "&lt;br>";
+}
+?&gt;
+    </pre>
+    <p>This code displays a list of usernames and plaintext passwords directly on the page, making them accessible to anyone who can view the output.</p>
+
+    <h3>Why It’s Vulnerable</h3>
+    <p>Exposing passwords in plaintext is catastrophic because it eliminates the need for attackers to crack or guess credentials. Specific risks include:</p>
+    <ul>
+        <li><strong>Direct Access</strong>: An attacker viewing the page can see all usernames and passwords, e.g., <code>admin:secret123</code>, and immediately log in to those accounts.</li>
+        <li><strong>Password Reuse</strong>: Users often reuse passwords across sites. Exposed passwords like <code>user1:password123</code> could compromise accounts on other platforms (e.g., email, banking).</li>
+        <li><strong>Automated Attacks</strong>: Attackers can scrape the list and use scripts to test these credentials on other systems, amplifying the damage.</li>
+    </ul>
+    <p>Beyond exposure, other password-related vulnerabilities in this context include:</p>
+    <ul>
+        <li><strong>Plaintext Storage</strong>: The database likely stores passwords in plaintext (as shown in the output), meaning a database breach would expose all credentials.</li>
+        <li><strong>Weak Passwords</strong>: If the exposed list includes weak passwords (e.g., <code>123456</code>), attackers can easily guess them elsewhere.</li>
+        <li><strong>No Rate Limiting</strong>: If the system allows unlimited login attempts, attackers could brute-force passwords even without the list.</li>
+    </ul>
+    <p>These issues arise because the system lacks proper password protection mechanisms, making credentials an easy target.</p>
+
+    <h2>Types of Password Attacks</h2>
+    <p>Password attacks come in various forms, exploiting different weaknesses:</p>
+    <ul>
+        <li><strong>Credential Exposure</strong>: As in this level, passwords are directly exposed (e.g., via a webpage or database leak), requiring no further effort from attackers.</li>
+        <li><strong>Brute Force</strong>: Attackers systematically try all possible password combinations, effective against short or weak passwords.</li>
+        <li><strong>Dictionary Attacks</strong>: Attackers use lists of common passwords (e.g., <code>password123</code>) to guess credentials quickly.</li>
+        <li><strong>Phishing</strong>: Attackers trick users into entering passwords on fake login pages, capturing credentials.</li>
+        <li><strong>Credential Stuffing</strong>: Attackers use leaked credentials from one site to try logging into others, exploiting password reuse.</li>
+    </ul>
+
+    <h2>Techniques to Prevent Password Attacks</h2>
+    <p>To secure passwords and prevent attacks, use these best practices:</p>
+    <ol>
+        <li><strong>Hash Passwords with Strong Algorithms</strong>:
+            <p>Store passwords as hashed values using secure algorithms like bcrypt, never in plaintext.</p>
+            <pre>
+&lt;?php
+$password = "user_input";
+$hashed_password = password_hash($password, PASSWORD_BCRYPT);
+echo "Stored hash: $hashed_password";
+?&gt;
+            </pre>
+            <p><strong>Why It Works</strong>: Even if the database is exposed, hashed passwords are computationally difficult to reverse, protecting credentials.</p>
+        </li>
+        <li><strong>Never Expose Passwords</strong>:
+            <p>Avoid displaying passwords in any form, even to administrators.</p>
+            <pre>
+&lt;?php
+$query = "SELECT username FROM users";
+$result = $pdo->query($query);
+foreach ($result as $row) {
+    echo "Username: " . htmlspecialchars($row['username'], ENT_QUOTES, 'UTF-8') . "&lt;br>";
+}
+?&gt;
+            </pre>
+            <p><strong>Why It Works</strong>: Excluding passwords from output ensures they remain confidential, preventing exposure like in this level.</p>
+        </li>
+        <li><strong>Enforce Strong Password Policies</strong>:
+            <p>Require complex passwords to resist guessing or cracking.</p>
+            <pre>
+&lt;?php
+$password = $_POST['password'];
+if (!preg_match('/^(?=.*[A-Z])(?=.*[a-z])(?=.*\d).{8,}$/', $password)) {
+    die("Password must be at least 8 characters, with uppercase, lowercase, and a number.");
+}
+?&gt;
+            </pre>
+            <p><strong>Why It Works</strong>: Strong passwords (e.g., <code>P@ssw0rd2023</code>) are harder to brute-force or guess, reducing vulnerability.</p>
+        </li>
+        <li><strong>Implement Rate Limiting</strong>:
+            <p>Limit login attempts to block brute-force attacks.</p>
+            <pre>
+&lt;?php
+session_start();
+if (!isset($_SESSION['login_attempts'])) {
+    $_SESSION['login_attempts'] = 0;
+}
+if ($_SESSION['login_attempts'] >= 5) {
+    die("Too many attempts. Try again later.");
+}
+$_SESSION['login_attempts']++;
+?&gt;
+            </pre>
+            <p><strong>Why It Works</strong>: Slows down or stops attackers from trying multiple passwords, protecting accounts.</p>
+        </li>
+        <li><strong>Use Multi-Factor Authentication (MFA)</strong>:
+            <p>Add a second layer of verification beyond passwords.</p>
+            <pre>
+&lt;?php
+if (!verify_mfa_code($_POST['mfa_code'], $user)) {
+    die("Invalid MFA code.");
+}
+?&gt;
+            </pre>
+            <p><strong>Why It Works</strong>: Even if a password is exposed, attackers need additional verification, greatly reducing unauthorized access.</p>
+        </li>
+    </ol>
+
+    <form method="get" action="../views/success_view.phtml">
+        <button type="submit">Back to Selection page</button>
+    </form>
+</div>
+</body>
+</html>

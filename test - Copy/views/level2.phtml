@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Level 2: SQL Injection Challenge</title>
+    <style>
+        body {
+            background-color: #000;
+            color: #fff;
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .container {
+            background-color: #222;
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+            width: 400px;
+            text-align: center;
+        }
+        input[type="text"], button {
+            width: calc(100% - 20px);
+            margin: 10px auto;
+            padding: 10px;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+        }
+        input[type="text"] {
+            background-color: #333;
+            color: #fff;
+        }
+        button {
+            background-color: #444;
+            color: #fff;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #555;
+        }
+        pre {
+            background-color: #333;
+            color: #0f0;
+            padding: 10px;
+            text-align: left;
+            border-radius: 8px;
+            overflow-x: auto;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>Simple Blind SQL Injection Challenge</h1>
+    <p>Welcome to Level 2! Can you find the hidden server detail?</p>
+    <p>This is a blind challenge—you won’t see the server details directly. Use SQL injection to uncover a hidden column.</p>
+
+    <div class="hint">
+        <p><strong>Hint 1:</strong> Try adding <code>ORDER BY 1</code>, <code>ORDER BY 2</code>, etc., to see how many columns the query returns. Errors can tell you when you’ve gone too far!</p>
+        <p><strong>Hint 2:</strong> The table is called <code>level_2</code> and has a hidden column related to how servers communicate. Maybe it’s something like <code>port</code>?</p>
+        <p><strong>Hint 3:</strong> Use <code>UNION SELECT</code> to test for the hidden column. If you guess the right column name, you might get a different response.</p>
+        <p><strong>Hint 4:</strong> To inject, try inputs like <code>Linux' YOUR_INJECTION--</code>. The <code>--</code> ignores the rest of the query.</p>
+    </div>
+
+    <form method="post">
+        <input type="text" name="os" placeholder="Enter OS (e.g., Linux, Windows Server)" required>
+        <button type="submit">Search</button>
+    </form>
+
+    <?php if (!empty($servers) && is_array($servers) && !isset($servers['error'])): ?>
+        <h2>Results:</h2>
+        <ul>
+            <?php foreach ($servers as $row): ?>
+                <?php if (isset($row['hostname'], $row['ip'])): ?>
+                    <li><strong><?= htmlspecialchars($row['hostname']) ?>:</strong> <?= htmlspecialchars($row['ip']) ?></li>
+                <?php endif; ?>
+            <?php endforeach; ?>
+        </ul>
+        <form method="get" action="level1_explanation.php">
+            <button type="submit">Proceed to Explanation</button>
+        </form>
+    <?php elseif (isset($error)): ?>
+        <p>Error: <?= htmlspecialchars($error) ?></p>
+    <?php else: ?>
+        <p>No matching records found.</p>
+    <?php endif; ?>
+
+</div>
+</body>
+</html>

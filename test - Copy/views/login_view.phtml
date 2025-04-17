@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title><?php echo isset($_GET['action']) && $_GET['action'] === 'register' ? 'Register' : 'Login'; ?></title>
+    <style>
+        body {
+            background-color: black;
+            color: white;
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .login-box {
+            background-color: white;
+            color: black;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            width: 300px;
+        }
+        input[type="text"], input[type="password"] {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        button {
+            width: 100%;
+            padding: 10px;
+            background-color: black;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            margin: 5px 0;
+        }
+        button:hover {
+            background-color: #444;
+        }
+        .switch-form {
+            margin-top: 15px;
+            font-size: 14px;
+        }
+        .switch-form a {
+            color: #0066cc;
+            text-decoration: none;
+        }
+        .switch-form a:hover {
+            text-decoration: underline;
+        }
+        .error-message {
+            color: red;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+<div class="login-box">
+    <h1><?php echo isset($_GET['action']) && $_GET['action'] === 'register' ? 'Register' : 'Login'; ?></h1>
+
+    <?php if (isset($error)): ?>
+        <div class="error-message"><?php echo htmlspecialchars($error); ?></div>
+    <?php endif; ?>
+
+    <?php if (!isset($_GET['action']) || $_GET['action'] === 'login'): ?>
+        <form method="POST" action="index.php">
+            <input type="hidden" name="action" value="login">
+            <label for="username">Username:</label>
+            <input type="text" id="username" name="username" required>
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" required>
+            <button type="submit">Login</button>
+        </form>
+        <div class="switch-form">
+            Don't have an account? <a href="index.php?action=register">Register here</a>
+        </div>
+    <?php else: ?>
+        <form method="POST" action="index.php">
+            <input type="hidden" name="action" value="register">
+            <label for="username">Username:</label>
+            <input type="text" id="username" name="username" required>
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" required>
+            <button type="submit">Register</button>
+        </form>
+        <div class="switch-form">
+            Already have an account? <a href="index.php">Login here</a>
+        </div>
+    <?php endif; ?>
+</div>
+</body>
+</html>

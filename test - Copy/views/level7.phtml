@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Level 7: SQL Injection Practice (Login)</title>
+    <style>
+        body {
+            background-color: #000;
+            color: #fff;
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .container {
+            background-color: #222;
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+            width: 400px;
+            text-align: center;
+        }
+        input[type="text"], input[type="password"], button {
+            width: calc(100% - 20px);
+            margin: 10px auto;
+            padding: 10px;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+        }
+        input[type="text"], input[type="password"] {
+            background-color: #333;
+            color: #fff;
+        }
+        button {
+            background-color: #444;
+            color: #fff;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #555;
+        }
+        pre {
+            background-color: #333;
+            color: #0f0;
+            padding: 10px;
+            text-align: left;
+            border-radius: 8px;
+            overflow-x: auto;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>Level 7: SQL Injection Challenge (Login)</h1>
+    <p>Your mission: Trick this login form into granting access without knowing the correct credentials. Can you craft inputs for the username or password fields to outsmart the query?</p>
+    <p>Take a close look at the query below to spot how user inputs are handled—it’s your key to unlocking the challenge.</p>
+
+    <h2>Source Code of the Query</h2>
+    <pre>
+$query = "SELECT * FROM users WHERE username = '$username' AND password = '$password'";
+</pre>
+
+    <p><strong>Hint:</strong> Tools like SQLMap can help automate
+        the discovery of SQL injection vulnerabilities.
+        Think about how you might configure such a tool to
+        probe this form and reveal the hidden flag. Experiment,
+        explore, and see what you can uncover!
+    you might even find information outside of this</p>
+
+    <form method="post">
+        <input type="text" name="username" placeholder="Enter username..." required>
+        <input type="password" name="password" placeholder="Enter password..." required>
+        <button type="submit">Login</button>
+    </form>
+
+    <?php if ($result): ?>
+        <h2>Login Successful!</h2>
+        <p>Welcome, <?= htmlspecialchars($result['username']) ?>!</p>
+        <p><?= htmlspecialchars($result['flag']) ?></p>
+    <?php elseif (isset($error)): ?>
+        <p>Error: <?= htmlspecialchars($error) ?></p>
+    <?php else: ?>
+        <p>Enter credentials to login.</p>
+    <?php endif; ?>
+</div>
+</body>
+</html>
