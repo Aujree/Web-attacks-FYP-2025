@@ -34,7 +34,7 @@ Configure your web server (e.g., Apache) to point to the project directory.
 Ensure PHP is enabled.
 
 3. Database Configuration:
-Import the provided database.sql file into SQLite
+Import the provided database.sql-tables file into SQLite
 Update config.php with your database credentials.
 
 4. Network Configuration (for Kali Linux tools):
