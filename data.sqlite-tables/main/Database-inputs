@@ -1,0 +1,58 @@
+Input for each tables to fill it:
+
+Level 1:
+luke,Luke's information,06-05-04
+mary,Mary's information,07-01-03
+John,John's information,05-03-02
+Sarah,Sarah's information,12-09-05
+Tom,Tom's information,03-11-01
+Emily,Emily's information,15-07-04
+David,David's information,22-02-03
+Anna,Anna's information,30-12-02
+Michael,Michael's information,09-04-05
+
+Level 2:
+LinuxHost,192,Linux,LinuxPort
+WindowsHost,168,Windows,WindowsPort
+AppleHost,110,Mac,ApplePort
+
+Level 3:
+1,host,ip,80,Linux
+
+Level 4:
+N/A (User upload)
+
+Level 5:
+N/A (Updated during this level)
+
+Level 6:
+,admin,password123
+
+Level 7:
+admin,password123
+realuser,fakepassword123
+
+logs:
+N/A (Updated throughout each level - All unique to each user)
+
+user:
+N/A (Login requirements, can be registered, unique to each user)
+
+
+XSS:
+<script%
+%onerror=%
+%onload=%
+%javascript:%
+%eval(%
+%document.cookie%
+%window.location%
+<a%
+%onmouseover%
+<svg%
+alert(
+%onkeypress%
+%onfocus%
+javascript:
+fetch(
+
