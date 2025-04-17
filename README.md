@@ -13,6 +13,8 @@ This project is an educational web platform designed to teach cybersecurity conc
 
 The platform is intended for students, educators, and cybersecurity enthusiasts to download and use locally. You may modify the code locally for personal use, but contributions or modifications to this repository are not accepted to preserve the original project.
 
+This project was created for a final year project and is not fully polished, do not enter this project with an expectation everything described runs well. It all depends on the configuration process.
+
 ## Prerequisites
 To run this project locally, ensure you have:
 - **PHP** (version 7.4 or higher) for the backend.
